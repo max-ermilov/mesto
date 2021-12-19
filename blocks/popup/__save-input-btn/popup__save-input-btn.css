@@ -1,0 +1,28 @@
+.popup__save-input-btn {
+  margin-top: 48px;
+  background: #000000;
+  border-radius: 2px;
+  color: #fff;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: center;
+  align-self: center;
+  width: calc(100% - 36px * 2);
+  max-width: 358px;
+  min-height: 50px;
+  /* border: none; */
+}
+
+.popup__save-input-btn:hover {
+  opacity: 0.8;
+}
+
+@media screen and (max-width: 580px) {
+  .popup__save-input-btn {
+    width: 84.397%;
+    min-height: 46px;
+    font-size: 14px;
+    line-height: 17px;
+  }
+}

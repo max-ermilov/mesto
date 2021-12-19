@@ -23,52 +23,84 @@
           </div>
         </div>
         <button class="button profile__add-btn"></button>
-        <form class="popup" hidden>
+      </section>
+      <section class="popup" aria-label="Редактировать профиль">
+        <!-- <div class="popup__container"> -->
+        <!-- <form class="popup__form"> -->
+        <form class="popup__container">
           <label class="popup__title">Редактировать профиль</label>
-          <input type="text" class="popup__name-input" />
-          <input type="text" class="popup__job-input" />
-          <input class="popup__save-input" type="submit" value="Cохранить" />
+          <input type="text" class="popup__input popup__input_field_name" />
+          <input type="text" class="popup__input popup__input_field_job" />
+          <input class="button popup__save-input-btn" type="submit" value="Cохранить" />
+
+          <button class="button popup__close-btn"></button>
         </form>
+        <!-- </div> -->
+        <!-- <button class="popup__close-btn"></button> -->
       </section>
       <section class="elements">
         <ul class="elements__list">
           <li class="element">
-            <img src="./images/place__photo-01.jpg" alt="Карачаевск" class="element__image" />
+            <img
+              src="./images/place__photo-01.jpg"
+              alt="Карачаевск"
+              class="element__image"
+            />
             <div class="element__description">
               <h3 class="element__name">Карачаевск</h3>
               <button class="button element__like-btn"></button>
             </div>
           </li>
           <li class="element">
-            <img src="./images/place__photo-02.jpg" alt="Эльбрус на закате" class="element__image" />
+            <img
+              src="./images/place__photo-02.jpg"
+              alt="Эльбрус на закате"
+              class="element__image"
+            />
             <div class="element__description">
               <h3 class="element__name">Гора Эльбрус</h3>
               <button class="button element__like-btn"></button>
             </div>
           </li>
           <li class="element">
-            <img src="./images/place__photo-03.jpg" alt="Лес на фоне горной вершины" class="element__image" />
+            <img
+              src="./images/place__photo-03.jpg"
+              alt="Лес на фоне горной вершины"
+              class="element__image"
+            />
             <div class="element__description">
               <h3 class="element__name">Домбай</h3>
               <button class="button element__like-btn"></button>
             </div>
           </li>
           <li class="element">
-            <img src="./images/place__photo-04.jpg" alt="Горный ручей в скалах" class="element__image" />
+            <img
+              src="./images/place__photo-04.jpg"
+              alt="Горный ручей в скалах"
+              class="element__image"
+            />
             <div class="element__description">
               <h3 class="element__name">Карачаево-Черкесская Республика</h3>
               <button class="button element__like-btn"></button>
             </div>
           </li>
           <li class="element">
-            <img src="./images/place__photo-05.jpg" alt="Вид с реки на осенний лес" class="element__image" />
+            <img
+              src="./images/place__photo-05.jpg"
+              alt="Вид с реки на осенний лес"
+              class="element__image"
+            />
             <div class="element__description">
               <h3 class="element__name">Мурманская область</h3>
               <button class="button element__like-btn"></button>
             </div>
           </li>
           <li class="element">
-            <img src="./images/place__photo-06.jpg" alt="Вид на снежный склон горы от подножия" class="element__image" />
+            <img
+              src="./images/place__photo-06.jpg"
+              alt="Вид на снежный склон горы от подножия"
+              class="element__image"
+            />
             <div class="element__description">
               <h3 class="element__name">Хибины</h3>
               <button class="button element__like-btn"></button>

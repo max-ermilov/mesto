@@ -5,13 +5,6 @@
   gap: 30px;
   /* justify-self: center; */
   justify-content: center;
-
-}
-
-@media screen and (max-width: 660px) {
-  .profile__content {
-    /* position: relative; */
-  }
 }
 
 @media screen and (max-width: 580px) {
