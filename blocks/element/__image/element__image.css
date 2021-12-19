@@ -1,0 +1,13 @@
+.element__image {
+  margin: 0;
+  width: 100%;
+  object-fit: cover;
+  object-position: top;
+
+}
+
+.element__image:after {
+  content: "";
+  display: block;
+  padding-bottom: 100%;
+}
