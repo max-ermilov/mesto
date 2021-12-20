@@ -4,10 +4,6 @@
   margin-top: 21px;
   outline: none;
   border: none;
-  /* temporary >> */
-  /* outline: 1px solid #9e0000; */
-  /* << temporary */
-  /* opacity: 0.2; */
   border-bottom: 1px solid #ccc;
   align-self: center;
   width: calc(100% - 36px * 2);

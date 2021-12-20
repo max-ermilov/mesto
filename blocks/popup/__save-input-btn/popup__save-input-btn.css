@@ -11,7 +11,6 @@
   width: calc(100% - 36px * 2);
   max-width: 358px;
   min-height: 50px;
-  /* border: none; */
 }
 
 .popup__save-input-btn:hover {

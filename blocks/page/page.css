@@ -1,9 +1,6 @@
 .page {
   margin: 0 auto;
-  /* background-color: #000; */
   background-color: #000;
-  /* max-width: 880px; */
-  /* width: 88.125%; */
   width: 100%;
   transition: 0.4s;
 
