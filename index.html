@@ -16,27 +16,20 @@
         <div class="profile__content">
           <img src="./images/avatar.jpg" alt="" class="profile__avatar" />
           <div class="profile__info">
-            <h2 class="profile__name">
-              Жак-Ив Кусто<button class="button profile__edit-btn"></button>
-            </h2>
+            <h2 class="profile__name"><span class="profile__name-text">Жак-Ив Кусто</span><button class="button profile__edit-btn"></button></h2>
             <p class="profile__job">Исследователь океана</p>
           </div>
         </div>
         <button class="button profile__add-btn"></button>
       </section>
       <section class="popup" aria-label="Редактировать профиль">
-        <!-- <div class="popup__container"> -->
-        <!-- <form class="popup__form"> -->
         <form class="popup__container">
           <label class="popup__title">Редактировать профиль</label>
           <input type="text" class="popup__input popup__input_field_name" />
           <input type="text" class="popup__input popup__input_field_job" />
           <input class="button popup__save-input-btn" type="submit" value="Cохранить" />
-
-          <button class="button popup__close-btn"></button>
+          <button class="button popup__close-btn" type="button"></button>
         </form>
-        <!-- </div> -->
-        <!-- <button class="popup__close-btn"></button> -->
       </section>
       <section class="elements">
         <ul class="elements__list">
@@ -112,5 +105,6 @@
     <footer class="footer page__footer">
       <p class="footer__copyright">© 2020 Mesto Russia</p>
     </footer>
+    <script src="./scripts/index.js"></script>
   </body>
 </html>
