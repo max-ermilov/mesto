@@ -5,9 +5,9 @@
   width: 100%;
   max-width: 430px;
   min-height: 330px;
-  display: flex;
+  /* display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: flex-start; */
   position: relative;
 }
 

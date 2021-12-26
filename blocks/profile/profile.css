@@ -4,13 +4,10 @@
   width: 100%;
   color: #fff;
   display: flex;
-  /* position: relative; */
   justify-content: space-between;
-  /* justify-self: center; */
   align-items: center;
   flex-wrap: wrap;
   gap: 30px;
-
 }
 
 @media screen and (max-width: 660px) {
