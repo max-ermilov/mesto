@@ -14,7 +14,11 @@
     <main class="content page__content">
       <section class="profile">
         <div class="profile__content">
-          <img src="./images/avatar.jpg" alt="Фото профиля" class="profile__avatar" />
+          <img
+            src="./images/avatar.jpg"
+            alt="Фото профиля"
+            class="profile__avatar"
+          />
           <div class="profile__info">
             <div class="profile__name">
               <h1 class="profile__name-text">Жак-Ив Кусто</h1>
@@ -133,27 +137,32 @@
     <div class="popup">
       <div class="popup__container">
         <h2 class="popup__title">Редактировать профиль</h2>
-        <form class="popup__form" name="Редактировать профиль">
+        <form class="popup__form" name="Edit profile">
           <input
             type="text"
             class="popup__input popup__input_field_name"
-            name="Имя"
-            />
+            name="Name"
+            placeholder="Имя"
+            required
+          />
           <input
             type="text"
             class="popup__input popup__input_field_job"
-            name="Род деятельности"
-            />
+            name="Job"
+            placeholder="Род занатий"
+            required
+          />
           <input
             class="button popup__save-input-btn"
             type="submit"
             value="Cохранить"
+            name="Save"
           />
         </form>
         <button
           class="button popup__close-btn"
           type="button"
-          aria-label="Закрыть"
+          name="Close"
         ></button>
       </div>
     </div>

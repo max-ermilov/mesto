@@ -1,5 +1,7 @@
 .profile__info {
   margin: 0;
+  width: 100%;
+  max-width: 335px;
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -10,5 +12,7 @@
   .profile__info {
     text-align: center;
     gap: 4px;
+    width: 85%;
+    max-width: 490px;
   }
 }
