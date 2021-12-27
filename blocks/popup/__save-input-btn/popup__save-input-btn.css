@@ -1,5 +1,6 @@
 .popup__save-input-btn {
   margin-top: 48px;
+  margin-bottom: 33px;
   background: #000000;
   border-radius: 2px;
   color: #fff;
@@ -23,5 +24,6 @@
     min-height: 46px;
     font-size: 14px;
     line-height: 17px;
+    margin-bottom: 24px;
   }
 }

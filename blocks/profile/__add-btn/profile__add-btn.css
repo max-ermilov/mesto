@@ -1,6 +1,7 @@
 .profile__add-btn {
   height: 50px;
-  width: 150px;
+  max-width: 150px;
+  width: 100%;
   border: 2px solid #fff;
   border-radius: 2px;
   background-image: url(../../../images/add.svg);
@@ -10,9 +11,11 @@
   justify-self: end;
 }
 
-@media screen and (max-width: 660px) {
+@media screen and (max-width: 580px) {
   .profile__add-btn {
     width: 80%;
     min-width: 282px;
+    box-sizing: border-box;
+    background-size: 16px 16px;
   }
 }
