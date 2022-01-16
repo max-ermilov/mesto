@@ -37,98 +37,7 @@
         ></button>
       </section>
       <section class="elements">
-        <ul class="elements__list">
-          <li class="element">
-            <img
-              src="./images/place__photo-01.jpg"
-              alt="Карачаевск"
-              class="element__image"
-            />
-            <div class="element__description">
-              <h2 class="element__name">Карачаевск</h2>
-              <button
-                class="button element__like-btn"
-                aria-label="Нравится"
-                type="button"
-              ></button>
-            </div>
-          </li>
-          <li class="element">
-            <img
-              src="./images/place__photo-02.jpg"
-              alt="Эльбрус на закате"
-              class="element__image"
-            />
-            <div class="element__description">
-              <h2 class="element__name">Гора Эльбрус</h2>
-              <button
-                class="button element__like-btn"
-                aria-label="Нравится"
-                type="button"
-              ></button>
-            </div>
-          </li>
-          <li class="element">
-            <img
-              src="./images/place__photo-03.jpg"
-              alt="Лес на фоне горной вершины"
-              class="element__image"
-            />
-            <div class="element__description">
-              <h2 class="element__name">Домбай</h2>
-              <button
-                class="button element__like-btn"
-                aria-label="Нравится"
-                type="button"
-              ></button>
-            </div>
-          </li>
-          <li class="element">
-            <img
-              src="./images/place__photo-04.jpg"
-              alt="Горный ручей в скалах"
-              class="element__image"
-            />
-            <div class="element__description">
-              <h2 class="element__name">Карачаево-Черкесская Республика</h2>
-              <button
-                class="button element__like-btn"
-                aria-label="Нравится"
-                type="button"
-              ></button>
-            </div>
-          </li>
-          <li class="element">
-            <img
-              src="./images/place__photo-05.jpg"
-              alt="Вид с реки на осенний лес"
-              class="element__image"
-            />
-            <div class="element__description">
-              <h2 class="element__name">Мурманская область</h2>
-              <button
-                class="button element__like-btn"
-                aria-label="Нравится"
-                type="button"
-              ></button>
-            </div>
-          </li>
-          <li class="element">
-            <img
-              src="./images/place__photo-06.jpg"
-              alt="Вид на снежный склон горы от подножия"
-              class="element__image"
-            />
-            <div class="element__description">
-              <h2 class="element__name">Хибины</h2>
-              <button
-                class="button element__like-btn"
-                aria-label="Нравится"
-                type="button"
-              ></button>
-            </div>
-          </li>
-        </ul>
+        <ul class="elements__list"></ul>
       </section>
     </main>
     <footer class="footer page__footer">
@@ -166,6 +75,20 @@
         ></button>
       </div>
     </div>
+    <template class="card-template">
+      <li class="element">
+        <div class="element__image-container"><img class="element__image"/></div>
+        <div class="element__description">
+          <h2 class="element__name"></h2>
+          <button
+            class="button element__like-btn"
+            aria-label="Нравится"
+            name="Like"
+            type="button"
+          ></button>
+        </div>
+      </li>
+    </template>
     <script src="./scripts/index.js"></script>
   </body>
 </html>
