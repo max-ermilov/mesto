@@ -28,13 +28,22 @@ const initialCards = [
 const list = document.querySelector('.elements__list');
 const cardTemplate = document.querySelector('.card-template').content;
 
+function deleteHandler(e) {
+  e.target.closest('.element').remove();
+}
+
 function createCard(cardData) {
   const cardElement = cardTemplate.cloneNode(true);
   const cardImage = cardElement.querySelector('.element__image');
   const cardTitle = cardElement.querySelector('.element__name');
+  const deleteButton = cardElement.querySelector('.element__delete-btn');
+  const likeButton = cardElement.querySelector('.element__like-btn');
+
   cardTitle.textContent = cardData.name;
   cardImage.src = cardData.link;
   cardImage.alt = cardData.name;
+
+  deleteButton.addEventListener('click', deleteHandler);
   list.prepend(cardElement);
 }
 initialCards.forEach(createCard);
