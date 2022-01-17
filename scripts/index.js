@@ -32,6 +32,10 @@ function deleteHandler(e) {
   e.target.closest('.element').remove();
 }
 
+function likeHandler(e) {
+  e.target.classList.toggle('element__like-btn_active');
+}
+
 function createCard(cardData) {
   const cardElement = cardTemplate.cloneNode(true);
   const cardImage = cardElement.querySelector('.element__image');
@@ -44,6 +48,7 @@ function createCard(cardData) {
   cardImage.alt = cardData.name;
 
   deleteButton.addEventListener('click', deleteHandler);
+  likeButton.addEventListener('click', likeHandler);
   list.prepend(cardElement);
 }
 initialCards.forEach(createCard);
