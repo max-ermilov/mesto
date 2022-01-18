@@ -2,7 +2,6 @@
   margin-left: 20px;
   height: 19px;
   width: 22px;
-  /* border: none; */
   background-image: url(../../../images/like.svg);
   background-repeat: no-repeat;
   background-position: 50%;
@@ -24,4 +23,3 @@
     width: 25px;
   }
 }
-
