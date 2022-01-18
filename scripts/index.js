@@ -36,6 +36,11 @@ function likeHandler(e) {
   e.target.classList.toggle('element__like-btn_active');
 }
 
+//  Modals
+const editModal = document.querySelector('.popup_type_edit');
+const addCardModal = document.querySelector('.popup_type_add-card');
+const imageModal = document.querySelector('.popup_type_image');
+
 function createCard(cardData) {
   const cardElement = cardTemplate.cloneNode(true);
   const cardImage = cardElement.querySelector('.element__image');
@@ -49,13 +54,17 @@ function createCard(cardData) {
 
   deleteButton.addEventListener('click', deleteHandler);
   likeButton.addEventListener('click', likeHandler);
+  cardImage.addEventListener('click', () => {
+    const imageOpened = imageModal.querySelector('.popup__image');
+    const imageOpenedName = imageModal.querySelector('.popup__image-name');
+    imageOpened.src = cardImage.src;
+    imageOpened.alt = cardTitle.textContent;
+    imageOpenedName.textContent = cardTitle.textContent;
+    toggleModal(imageModal);
+  });
   list.prepend(cardElement);
 }
 initialCards.forEach(createCard);
-
-//  Modals
-const editModal = document.querySelector('.popup_type_edit');
-const addCardModal = document.querySelector('.popup_type_add-card');
 
 //  Forms
 const editForm = editModal.querySelector('.popup__form');
@@ -76,6 +85,7 @@ const editProfileButton = document.querySelector('.profile__edit-btn');
 const closeEditModalButton = editModal.querySelector('.popup__close-btn');
 const addCardButton = document.querySelector('.profile__add-btn');
 const closeAddModalButton = addCardModal.querySelector('.popup__close-btn');
+const closeImageModalButton = imageModal.querySelector('.popup__close-btn');
 
 //  add current values to editModal
 inputName.value = profileName.textContent;
@@ -109,3 +119,5 @@ editForm.addEventListener('submit', editModalSubmitHandler);
 addCardButton.addEventListener('click', () => toggleModal(addCardModal));
 closeAddModalButton.addEventListener('click', () => toggleModal(addCardModal));
 addCardForm.addEventListener('submit', addCardModalSubmitHandler);
+
+closeImageModalButton.addEventListener('click', () => toggleModal(imageModal));
