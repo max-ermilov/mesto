@@ -31,7 +31,6 @@ const addCardButton = document.querySelector('.profile__add-btn');
 const closeAddModalButton = modalAddCard.querySelector('.popup__close-btn');
 const closeImageModalButton = imageModal.querySelector('.popup__close-btn');
 
-
 function deleteHandler(e) {
   e.target.closest('.element').remove();
 }

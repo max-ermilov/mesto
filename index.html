@@ -52,17 +52,23 @@
             class="popup__input popup__input_field_name"
             name="Name"
             placeholder="Имя"
+            minlength="2"
+            maxlength="40"
             required
           />
+          <span class="popup__input-error"></span>
           <input
             type="text"
             class="popup__input popup__input_field_job"
             name="Job"
             placeholder="Род занатий"
+            minlength="2"
+            maxlength="200"
             required
           />
+          <span class="popup__input-error"></span>
           <input
-            class="button popup__submit-btn popup__save-input-btn"
+            class="button popup__submit-btn popup__save-input-btn popup__submit-btn_inactive"
             type="submit"
             value="Cохранить"
             name="Save"
@@ -84,8 +90,11 @@
             class="popup__input popup__input_field_title"
             name="Title"
             placeholder="Название"
+            minlength="2"
+            maxlength="30"
             required
           />
+          <span class="popup__input-error"></span>
           <input
             type="url"
             class="popup__input popup__input_field_link"
@@ -93,6 +102,7 @@
             placeholder="Ссылка на картинку"
             required
           />
+          <span class="popup__input-error"></span>
           <input
             class="button popup__submit-btn popup__create-btn"
             type="submit"
@@ -108,15 +118,15 @@
       </div>
     </div>
     <div class="popup popup_type_image">
-        <figure class="popup__image-container">
-          <img class="popup__image"/>
-          <figcaption><h2 class="popup__image-name"></h2></figcaption>
-          <button
-            class="button popup__close-btn"
-            type="button"
-            name="Close"
-          ></button>
-        </figure>
+      <figure class="popup__image-container">
+        <img class="popup__image" />
+        <figcaption><h2 class="popup__image-name"></h2></figcaption>
+        <button
+          class="button popup__close-btn"
+          type="button"
+          name="Close"
+        ></button>
+      </figure>
     </div>
     <template class="card-template">
       <li class="element">
