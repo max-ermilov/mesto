@@ -73,14 +73,14 @@ function openModal(modal) {
   modal.classList.add('popup_opened');
   document.addEventListener('keydown', closeByEscape);
   // document.addEventListener('keydown', closeModalOnKeydownHandler(modal));
-  modal.addEventListener('click', closeModalOnOverlayClickHandler(modal));
+  // modal.addEventListener('click', closeModalOnOverlayClickHandler(modal));
 }
 
 function closeModal(modal) {
   modal.classList.remove('popup_opened');
   document.removeEventListener('keydown', closeByEscape);
   // document.removeEventListener('keydown', closeModalOnKeydownHandler(modal));
-  modal.removeEventListener('click', closeModalOnOverlayClickHandler(modal));
+  // modal.removeEventListener('click', closeModalOnOverlayClickHandler(modal));
 }
 
 function disableSubmitButton(button) {
@@ -114,13 +114,13 @@ function addCardModalSubmitHandler(e) {
   disableSubmitButtonOnSubmit(e);
 }
 
-function closeModalOnOverlayClickHandler(modal) {
-  return (e) => {
-    if (e.target === e.currentTarget) {
-      closeModal(modal);
-    }
-  };
-}
+// function closeModalOnOverlayClickHandler(modal) {
+//   return (e) => {
+//     if (e.target === e.currentTarget) {
+//       closeModal(modal);
+//     }
+//   };
+// }
 
 // function closeModalOnKeydownHandler(modal) {
 //   return (e) => {
