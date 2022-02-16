@@ -1,3 +1,7 @@
+import { config } from './constants.js';
+import { FormValidator } from './FormValidator.js';
+import { initialCards } from './initial-cards.js';
+
 const list = document.querySelector('.elements__list');
 const cardTemplate = document.querySelector('.card-template').content;
 
@@ -32,6 +36,10 @@ const closeModalEditProfileButton =
 const addCardButton = document.querySelector('.profile__add-btn');
 const closeAddModalButton = modalAddCard.querySelector('.popup__close-btn');
 const closeImageModalButton = imageModal.querySelector('.popup__close-btn');
+
+// Validators
+const formEditProfileValidator = new FormValidator(config, formEditProfile);
+const formAddCardValidator = new FormValidator(config, formAddCard);
 
 function deleteHandler(e) {
   e.target.closest('.element').remove();
@@ -123,6 +131,8 @@ function closeModalOnKeydownHandler(modal) {
 }
 
 initialCards.forEach(addCard);
+formEditProfileValidator.enableValidation();
+formAddCardValidator.enableValidation();
 
 editProfileButton.addEventListener('click', () => {
   inputName.value = profileName.textContent;

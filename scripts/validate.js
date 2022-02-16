@@ -52,10 +52,11 @@ function enableValidation({ formSelector, inputSelector, ...rest }) {
     inputs.forEach((input) => {
       input.addEventListener('input', () => {
         validateInput(form, input, rest);
+        toggleButton(form, rest);
       });
     });
 
-    toggleButton(form, rest);
+    // toggleButton(form, rest);
   });
 }
 
@@ -65,5 +66,5 @@ enableValidation({
   submitButtonSelector: '.popup__submit-btn',
   inactiveButtonClass: 'popup__submit-btn_inactive',
   inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__input-error',
+  errorClass: 'popup__input-error'
 });
