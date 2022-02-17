@@ -5,7 +5,6 @@ export class Card {
   constructor(data, cardTemplateSelector) {
     this._data = data;
     this._template = document.querySelector(cardTemplateSelector).content;
-    // this._template = document.querySelector(cardTemplateSelector).content.querySelector('.element');
   }
 
   _likeHandler() {
