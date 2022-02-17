@@ -11,6 +11,11 @@ const cardTemplateSelector = '.card-template';
 const modals = document.querySelectorAll('.popup');
 const modalEditProfile = document.querySelector('.popup_type_edit');
 const modalAddCard = document.querySelector('.popup_type_add-card');
+const imageModal = document.querySelector('.popup_type_image');
+
+//  imageModal content
+const imageOpened = imageModal.querySelector('.popup__image');
+const imageOpenedName = imageModal.querySelector('.popup__image-name');
 
 //  Forms
 const formEditProfile = modalEditProfile.querySelector('.popup__form');
@@ -39,8 +44,15 @@ const formEditProfileValidator = new FormValidator(
 );
 const formAddCardValidator = new FormValidator(validationConfig, formAddCard);
 
+function handleCardClick(name, link) {
+  imageOpened.src = link;
+  imageOpened.alt = name;
+  imageOpenedName.textContent = name;
+  openModal(imageModal);
+}
+
 function addCard(data) {
-  const card = new Card(data, cardTemplateSelector);
+  const card = new Card(data, cardTemplateSelector, handleCardClick);
   const cardElement = card.createCard();
   list.prepend(cardElement);
 }

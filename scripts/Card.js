@@ -1,15 +1,10 @@
-import { openModal } from './utils.js';
-
 export class Card {
-  constructor(data, cardTemplateSelector) {
+  constructor(data, cardTemplateSelector, handleCardClick) {
     this._data = data;
     this._template = document
       .querySelector(cardTemplateSelector)
       .content.querySelector('.element');
-    this._imageModal = document.querySelector('.popup_type_image');
-    this._imageOpened = this._imageModal.querySelector('.popup__image');
-    this._imageOpenedName =
-      this._imageModal.querySelector('.popup__image-name');
+    this._handleCardClick = handleCardClick;
   }
 
   _likeHandler() {
@@ -20,19 +15,12 @@ export class Card {
     this._cardElement.remove();
   }
 
-  _openImageModalHandler() {
-    this._imageOpened.src = this._data.link;
-    this._imageOpened.alt = this._data.name;
-    this._imageOpenedName.textContent = this._data.name;
-    openModal(this._imageModal);
-  }
-
   _setEventListeners() {
     this._deleteButton.addEventListener('click', () => this._deleteHandler());
     this._likeButton.addEventListener('click', () => this._likeHandler());
-    this._cardImage.addEventListener('click', () =>
-      this._openImageModalHandler()
-    );
+    this._cardImage.addEventListener('click', () => {
+      this._handleCardClick(this._data.name, this._data.link);
+    });
   }
 
   _fillCard() {
