@@ -1,5 +1,5 @@
 import { openModal } from './utils.js';
-import { imageModal, imageOpened, imageOpenedName } from './constants.js';
+// import { imageModal, imageOpened, imageOpenedName } from './constants.js';
 
 export class Card {
   constructor(data, cardTemplateSelector) {
@@ -7,6 +7,10 @@ export class Card {
     this._template = document
       .querySelector(cardTemplateSelector)
       .content.querySelector('.element');
+    this._imageModal = document.querySelector('.popup_type_image');
+    this._imageOpened = this._imageModal.querySelector('.popup__image');
+    this._imageOpenedName =
+      this._imageModal.querySelector('.popup__image-name');
   }
 
   _likeHandler() {
@@ -18,10 +22,10 @@ export class Card {
   }
 
   _openImageModalHandler() {
-    imageOpened.src = this._data.link;
-    imageOpened.alt = this._data.name;
-    imageOpenedName.textContent = this._data.name;
-    openModal(imageModal);
+    this._imageOpened.src = this._data.link;
+    this._imageOpened.alt = this._data.name;
+    this._imageOpenedName.textContent = this._data.name;
+    openModal(this._imageModal);
   }
 
   _setEventListeners() {
