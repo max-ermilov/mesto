@@ -4,7 +4,9 @@ import { imageModal, imageOpened, imageOpenedName } from './constants.js';
 export class Card {
   constructor(data, cardTemplateSelector) {
     this._data = data;
-    this._template = document.querySelector(cardTemplateSelector).content;
+    this._template = document
+      .querySelector(cardTemplateSelector)
+      .content.querySelector('.element');
   }
 
   _likeHandler() {
@@ -12,7 +14,6 @@ export class Card {
   }
 
   _deleteHandler() {
-    console.log(this._cardElement);
     this._cardElement.remove();
   }
 
@@ -24,9 +25,11 @@ export class Card {
   }
 
   _setEventListeners() {
-    this._deleteButton.addEventListener('click', this._deleteHandler);
-    this._likeButton.addEventListener('click', this._likeHandler);
-    this._cardImage.addEventListener('click', this._openImageModalHandler);
+    this._deleteButton.addEventListener('click', () => this._deleteHandler());
+    this._likeButton.addEventListener('click', () => this._likeHandler());
+    this._cardImage.addEventListener('click', () =>
+      this._openImageModalHandler()
+    );
   }
 
   _fillCard() {
@@ -40,7 +43,9 @@ export class Card {
 
     this._cardImage = this._cardElement.querySelector('.element__image');
     this._cardTitle = this._cardElement.querySelector('.element__name');
-    this._deleteButton = this._cardElement.querySelector('.element__delete-btn');
+    this._deleteButton = this._cardElement.querySelector(
+      '.element__delete-btn'
+    );
     this._likeButton = this._cardElement.querySelector('.element__like-btn');
 
     this._fillCard();

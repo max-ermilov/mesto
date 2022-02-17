@@ -1,12 +1,11 @@
 export class FormValidator {
-  constructor (settings, form) {
+  constructor(settings, form) {
     this._form = form;
     this._inputSelector = settings.inputSelector;
     this._errorClass = settings.errorClass;
     this._inputErrorClass = settings.inputErrorClass;
     this._submitButtonSelector = settings.submitButtonSelector;
     this._inactiveButtonClass = settings.inactiveButtonClass;
-
   }
 
   _showError(input, errorContainer, errorText) {
@@ -60,12 +59,3 @@ export class FormValidator {
     });
   }
 }
-
-// const config = {
-//   formSelector: '.popup__form',
-//   inputSelector: '.popup__input',
-//   submitButtonSelector: '.popup__submit-btn',
-//   inactiveButtonClass: 'popup__submit-btn_inactive',
-//   inputErrorClass: 'popup__input_type_error',
-//   errorClass: 'popup__input-error'
-// }
