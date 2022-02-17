@@ -1,6 +1,6 @@
 import { validationConfig, imageModal } from './constants.js';
 import { FormValidator } from './FormValidator.js';
-import { initialCards } from './initial-cards.js';
+import { initialCards } from './initialCards.js';
 import { openModal, closeModal } from './utils.js';
 import { Card } from './Card.js';
 
