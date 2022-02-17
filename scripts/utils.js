@@ -1,7 +1,7 @@
-function disableSubmitButton(button) {
-  button.classList.add('popup__submit-btn_inactive');
-  button.setAttribute('disabled', '');
-}
+// function disableSubmitButton(button) {
+//   button.classList.add('popup__submit-btn_inactive');
+//   button.setAttribute('disabled', '');
+// }
 
 export function closeModal(modal) {
   modal.classList.remove('popup_opened');
@@ -26,10 +26,10 @@ export function closeModalOnKeydownHandler(modal) {
 }
 
 export function openModal(modal) {
-  const currentSubmitButton = modal.querySelector('.popup__submit-btn');
-  if (currentSubmitButton) {
-    disableSubmitButton(currentSubmitButton);
-  }
+  // const currentSubmitButton = modal.querySelector('.popup__submit-btn');
+  // if (currentSubmitButton) {
+  //   disableSubmitButton(currentSubmitButton);
+  // }
   modal.classList.add('popup_opened');
   document.addEventListener('keydown', closeModalOnKeydownHandler(modal));
   modal.addEventListener('click', closeModalOnOverlayClickHandler(modal));

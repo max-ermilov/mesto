@@ -1,5 +1,4 @@
 import { openModal } from './utils.js';
-// import { imageModal, imageOpened, imageOpenedName } from './constants.js';
 
 export class Card {
   constructor(data, cardTemplateSelector) {

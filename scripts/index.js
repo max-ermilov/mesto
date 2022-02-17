@@ -1,4 +1,4 @@
-import { validationConfig, imageModal } from './constants.js';
+import { validationConfig } from './constants.js';
 import { FormValidator } from './FormValidator.js';
 import { initialCards } from './initialCards.js';
 import { openModal, closeModal } from './utils.js';
@@ -45,19 +45,11 @@ function addCard(data) {
   list.prepend(cardElement);
 }
 
-function disableSubmitButtonOnSubmit(e) {
-  const currentSubmitButton = e.target.querySelector('.popup__submit-btn');
-  if (currentSubmitButton) {
-    disableSubmitButton(currentSubmitButton);
-  }
-}
-
 function editProfileModalSubmitHandler(e) {
   e.preventDefault();
   profileName.textContent = inputName.value;
   profileJob.textContent = inputDescription.value;
   closeModal(modalEditProfile);
-  disableSubmitButtonOnSubmit(e);
 }
 
 function addCardModalSubmitHandler(e) {
@@ -68,7 +60,6 @@ function addCardModalSubmitHandler(e) {
   });
   formAddCard.reset();
   closeModal(modalAddCard);
-  disableSubmitButtonOnSubmit(e);
 }
 
 initialCards.forEach(addCard);
@@ -78,6 +69,7 @@ formAddCardValidator.enableValidation();
 editProfileButton.addEventListener('click', () => {
   inputName.value = profileName.textContent;
   inputDescription.value = profileJob.textContent;
+  formEditProfileValidator.toggleButton();
   openModal(modalEditProfile);
 });
 
@@ -85,17 +77,17 @@ formEditProfile.addEventListener('submit', editProfileModalSubmitHandler);
 
 addCardButton.addEventListener('click', () => {
   openModal(modalAddCard);
-  formAddCard.reset();
+  formAddCardValidator.toggleButton();
 });
 
 formAddCard.addEventListener('submit', addCardModalSubmitHandler);
 
 modals.forEach((modal) => {
   modal.addEventListener('click', (e) => {
-    if (e.target.classList.contains('popup_opened')) {
-      closeModal(modal);
-    }
-    if (e.target.classList.contains('popup__close-btn')) {
+    if (
+      e.target.classList.contains('popup_opened') ||
+      e.target.classList.contains('popup__close-btn')
+    ) {
       closeModal(modal);
     }
   });

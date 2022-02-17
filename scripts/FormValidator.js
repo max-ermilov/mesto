@@ -20,7 +20,7 @@ export class FormValidator {
     errorContainer.textContent = '';
   }
 
-  _toggleButton() {
+  toggleButton() {
     const button = this._form.querySelector(this._submitButtonSelector);
     const isFormValid = this._form.checkValidity();
 
@@ -45,7 +45,7 @@ export class FormValidator {
       this._showError(input, errorContainer, errorText);
     }
 
-    this._toggleButton();
+    this.toggleButton();
   }
 
   enableValidation() {
@@ -54,7 +54,7 @@ export class FormValidator {
     inputs.forEach((input) => {
       input.addEventListener('input', () => {
         this._validateInput(input);
-        this._toggleButton();
+        this.toggleButton();
       });
     });
   }
