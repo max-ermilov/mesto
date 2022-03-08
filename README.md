@@ -14,6 +14,8 @@
 * HTML
 * CSS
 * JS
+* Webpack
+* Babel
 
 
 ## Ссылка
