@@ -2,6 +2,7 @@ import FormValidator from './FormValidator.js';
 // import { openModal, closeModal } from './utils.js';
 import Card from './Card.js';
 import Section from './Section.js';
+import PopupWithImage from './PopupWithImage.js';
 import {
   validationConfig,
   cardsList,
@@ -37,10 +38,8 @@ const renderCardList = new Section(
   {
     items: initialCards,
     renderer: (element) => {
-      const card = new Card(element, cardTemplateSelector, handleCardClick);
-      // console.log(card);
+      const card = new Card(element, cardTemplateSelector, () => handleCardClick(element));
       const cardElement = card.createCard();
-      // console.log(cardElement);
       renderCardList.addItem(cardElement);
     },
   },
@@ -48,12 +47,17 @@ const renderCardList = new Section(
   cardsList
 );
 
-function handleCardClick(name, link) {
-  imageOpened.src = link;
-  imageOpened.alt = name;
-  imageOpenedName.textContent = name;
-  openModal(imageModal);
+const popupWithImage = new PopupWithImage('.popup_type_image');
+
+function handleCardClick(item) {
+  popupWithImage.open(item.name, item.link);
 }
+// function handleCardClick(name, link) {
+//   imageOpened.src = link;
+//   imageOpened.alt = name;
+//   imageOpenedName.textContent = name;
+//   openModal(imageModal);
+// }
 
 function addCard(data) {
   const card = new Card(data, cardTemplateSelector, handleCardClick);
@@ -99,6 +103,7 @@ function openModal(modal) {
 renderCardList.renderElements();
 formEditProfileValidator.enableValidation();
 formAddCardValidator.enableValidation();
+popupWithImage.setEventListeners();
 
 editProfileButton.addEventListener('click', () => {
   inputName.value = profileName.textContent;
@@ -116,13 +121,13 @@ addCardButton.addEventListener('click', () => {
 
 formAddCard.addEventListener('submit', addCardModalSubmitHandler);
 
-modals.forEach((modal) => {
-  modal.addEventListener('click', (e) => {
-    if (
-      e.target.classList.contains('popup_opened') ||
-      e.target.classList.contains('popup__close-btn')
-    ) {
-      closeModal(modal);
-    }
-  });
-});
+// modals.forEach((modal) => {
+//   modal.addEventListener('click', (e) => {
+//     if (
+//       e.target.classList.contains('popup_opened') ||
+//       e.target.classList.contains('popup__close-btn')
+//     ) {
+//       closeModal(modal);
+//     }
+//   });
+// });

@@ -3,13 +3,13 @@ export default class Popup {
     this._popup = document.querySelector(popupSelector);
   }
 
-  _handleEscClose(e) {
+  _handleEscClose = (e) => {
     if (e.key === 'Escape') {
       this.close();
     }
   }
 
-  _handleMouseClose(e) {
+  _handleMouseClose = (e) => {
     if (
       e.target.classList.contains('popup_opened') ||
       e.target.classList.contains('popup__close-btn')
