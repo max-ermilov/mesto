@@ -46,11 +46,11 @@
     <div class="popup popup_type_edit">
       <div class="popup__container">
         <h2 class="popup__title">Редактировать профиль</h2>
-        <form class="popup__form" name="Edit profile" novalidate>
+        <form class="popup__form" name="edit-profile" novalidate>
           <input
             type="text"
             class="popup__input popup__input_field_name"
-            name="Name"
+            name="name"
             id="name"
             placeholder="Имя"
             minlength="2"
@@ -61,7 +61,7 @@
           <input
             type="text"
             class="popup__input popup__input_field_job"
-            name="Job"
+            name="job"
             id="job"
             placeholder="Род занатий"
             minlength="2"
@@ -73,24 +73,24 @@
             class="button popup__submit-btn popup__save-input-btn popup__submit-btn_inactive"
             type="submit"
             value="Cохранить"
-            name="Save"
+            name="save"
           />
         </form>
         <button
           class="button popup__close-btn"
           type="button"
-          name="Close"
+          name="close"
         ></button>
       </div>
     </div>
     <div class="popup popup_type_add-card">
       <div class="popup__container">
         <h2 class="popup__title">Новое место</h2>
-        <form class="popup__form" name="New place" novalidate>
+        <form class="popup__form" name="new-place" novalidate>
           <input
             type="text"
             class="popup__input popup__input_field_title"
-            name="Title"
+            name="title"
             id="title"
             placeholder="Название"
             minlength="2"
@@ -101,7 +101,7 @@
           <input
             type="url"
             class="popup__input popup__input_field_link"
-            name="Link"
+            name="link"
             id="link"
             placeholder="Ссылка на картинку"
             required
@@ -111,13 +111,13 @@
             class="button popup__submit-btn popup__create-btn"
             type="submit"
             value="Создать"
-            name="Create"
+            name="create"
           />
         </form>
         <button
           class="button popup__close-btn"
           type="button"
-          name="Close"
+          name="close"
         ></button>
       </div>
     </div>
@@ -128,17 +128,17 @@
         <button
           class="button popup__close-btn"
           type="button"
-          name="Close"
+          name="close"
         ></button>
       </figure>
     </div>
     <template class="card-template">
       <li class="element">
         <div class="element__image-container">
-          <img class="element__image" alt="" & onerror="this.style.display='none'"/>
+          <img class="element__image" alt="""/>
           <button
             class="button element__delete-btn"
-            name="Delete"
+            name="delete"
             type="button"
             aria-label="Удалить"
           ></button>
@@ -148,7 +148,7 @@
           <button
             class="button element__like-btn"
             aria-label="Нравится"
-            name="Like"
+            name="like"
             type="button"
           ></button>
         </div>
