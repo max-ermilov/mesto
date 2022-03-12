@@ -1,8 +1,8 @@
 import FormValidator from './FormValidator.js';
-// import { openModal, closeModal } from './utils.js';
 import Card from './Card.js';
 import Section from './Section.js';
 import PopupWithImage from './PopupWithImage.js';
+import PopupWithForm from './PopupWithForm.js';
 import {
   validationConfig,
   cardsList,
@@ -25,39 +25,52 @@ import {
   addCardButton,
   initialCards }
   from './constants.js';
+import UserInfo from './UserInfo.js';
 
 
-// Validators
 const formEditProfileValidator = new FormValidator(
   validationConfig,
   formEditProfile
 );
 const formAddCardValidator = new FormValidator(validationConfig, formAddCard);
 
-const renderCardList = new Section(
+const section = new Section(
   {
     items: initialCards,
     renderer: (element) => {
       const card = new Card(element, cardTemplateSelector, () => handleCardClick(element));
       const cardElement = card.createCard();
-      renderCardList.addItem(cardElement);
+      section.addItem(cardElement);
     },
   },
-  // '.elements__list'
-  cardsList
+  '.elements__list'
 );
 
-const popupWithImage = new PopupWithImage('.popup_type_image');
-
-function handleCardClick(item) {
-  popupWithImage.open(item.name, item.link);
+const addCardModalSubmitHandler = (data) => {
+  const card = addCard({
+    name: data.title,
+    link: data.link
+  });
+  popupWithFormEditProfile.close();
 }
-// function handleCardClick(name, link) {
-//   imageOpened.src = link;
-//   imageOpened.alt = name;
-//   imageOpenedName.textContent = name;
-//   openModal(imageModal);
-// }
+
+const editProfileModalSubmitHandler = (data) => {
+  const { name, job} = data;
+  // profileName.textContent = name;
+  // profileJob.textContent = job;
+  userInfo.setUserInfo(name, job);
+  popupWithFormAddCard.close();
+}
+
+const popupWithImage = new PopupWithImage('.popup_type_image');
+const popupWithFormAddCard = new PopupWithForm('.popup_type_add-card', addCardModalSubmitHandler);
+const popupWithFormEditProfile = new PopupWithForm('.popup_type_edit', editProfileModalSubmitHandler);
+const userInfo = new UserInfo({ userNameSelector: '.profile__name-text', userJobSelector: '.profile__job' })
+
+function handleCardClick(data) {
+  console.log(data);
+  popupWithImage.open(data.name, data.link);
+}
 
 function addCard(data) {
   const card = new Card(data, cardTemplateSelector, handleCardClick);
@@ -65,69 +78,22 @@ function addCard(data) {
   cardsList.prepend(cardElement);
 }
 
-function editProfileModalSubmitHandler(e) {
-  e.preventDefault();
-  profileName.textContent = inputName.value;
-  profileJob.textContent = inputDescription.value;
-  closeModal(modalEditProfile);
-}
-
-function addCardModalSubmitHandler(e) {
-  e.preventDefault();
-  addCard({
-    name: inputTitle.value,
-    link: inputLink.value,
-  });
-  formAddCard.reset();
-  closeModal(modalAddCard);
-}
-
-function closeModal(modal) {
-  modal.classList.remove('popup_opened');
-  document.removeEventListener('keydown', closeModalOnKeydownHandler);
-}
-
-function closeModalOnKeydownHandler(e) {
-    if (e.key === 'Escape') {
-      const openedPopup = document.querySelector('.popup_opened'); // <==нашли открытый попап
-      closeModal(openedPopup);
-    }
-}
-
-function openModal(modal) {
-  modal.classList.add('popup_opened');
-  document.addEventListener('keydown', closeModalOnKeydownHandler);
-}
-
-// initialCards.forEach(addCard);
-renderCardList.renderElements();
+section.renderElements();
 formEditProfileValidator.enableValidation();
 formAddCardValidator.enableValidation();
 popupWithImage.setEventListeners();
+popupWithFormAddCard.setEventListeners();
+popupWithFormEditProfile.setEventListeners();
 
 editProfileButton.addEventListener('click', () => {
-  inputName.value = profileName.textContent;
-  inputDescription.value = profileJob.textContent;
+  const { name, job } = userInfo.getUserInfo()
+  inputName.value = name;
+  inputDescription.value = job;
   formEditProfileValidator.toggleButton();
-  openModal(modalEditProfile);
+  popupWithFormEditProfile.open();
 });
-
-formEditProfile.addEventListener('submit', editProfileModalSubmitHandler);
 
 addCardButton.addEventListener('click', () => {
-  openModal(modalAddCard);
+  popupWithFormAddCard.open();
   formAddCardValidator.toggleButton();
 });
-
-formAddCard.addEventListener('submit', addCardModalSubmitHandler);
-
-// modals.forEach((modal) => {
-//   modal.addEventListener('click', (e) => {
-//     if (
-//       e.target.classList.contains('popup_opened') ||
-//       e.target.classList.contains('popup__close-btn')
-//     ) {
-//       closeModal(modal);
-//     }
-//   });
-// });
