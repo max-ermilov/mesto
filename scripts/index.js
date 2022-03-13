@@ -3,30 +3,18 @@ import Card from './Card.js';
 import Section from './Section.js';
 import PopupWithImage from './PopupWithImage.js';
 import PopupWithForm from './PopupWithForm.js';
+import UserInfo from './UserInfo.js';
 import {
   validationConfig,
-  cardsList,
   cardTemplateSelector,
-  modals,
-  modalEditProfile,
-  modalAddCard,
-  imageModal,
-  imageOpened,
-  imageOpenedName,
   formEditProfile,
   formAddCard,
-  inputLink,
   inputName,
-  inputTitle,
   inputDescription,
-  profileName,
-  profileJob,
   editProfileButton,
   addCardButton,
   initialCards }
   from './constants.js';
-import UserInfo from './UserInfo.js';
-
 
 const formEditProfileValidator = new FormValidator(
   validationConfig,
@@ -47,17 +35,15 @@ const section = new Section(
 );
 
 const addCardModalSubmitHandler = (data) => {
-  const card = addCard({
-    name: data.title,
-    link: data.link
-  });
+  const card = new Card({ name: data.title, link: data.link }, cardTemplateSelector, () => handleCardClick(data));
+  const cardElement = card.createCard();
+  section.addItem(cardElement);
+
   popupWithFormEditProfile.close();
 }
 
 const editProfileModalSubmitHandler = (data) => {
   const { name, job} = data;
-  // profileName.textContent = name;
-  // profileJob.textContent = job;
   userInfo.setUserInfo(name, job);
   popupWithFormAddCard.close();
 }
@@ -68,14 +54,7 @@ const popupWithFormEditProfile = new PopupWithForm('.popup_type_edit', editProfi
 const userInfo = new UserInfo({ userNameSelector: '.profile__name-text', userJobSelector: '.profile__job' })
 
 function handleCardClick(data) {
-  console.log(data);
   popupWithImage.open(data.name, data.link);
-}
-
-function addCard(data) {
-  const card = new Card(data, cardTemplateSelector, handleCardClick);
-  const cardElement = card.createCard();
-  cardsList.prepend(cardElement);
 }
 
 section.renderElements();

@@ -13,7 +13,6 @@ export default class Section {
     this.clear();
 
     this._items.forEach(element => {
-      // console.log(element);
       this._renderer(element);
     });
   }
