@@ -4,7 +4,7 @@
 
 * Цель
 * Технологии
-* Ссылка
+* Ссылки
 
 ## Цель
 
@@ -18,7 +18,8 @@
 * Babel
 
 
-## Ссылка
+## Ссылки
 
-[Ссылка](https://max-ermilov.github.io/mesto/) на страницу на Github Pages.
+* [Ссылка](https://github.com/max-ermilov/mesto) на репозиторий Github
+* [Ссылка](https://max-ermilov.github.io/mesto/) на страницу Github Pages
 

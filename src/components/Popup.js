@@ -7,7 +7,7 @@ export default class Popup {
     if (e.key === 'Escape') {
       this.close();
     }
-  }
+  };
 
   _handleMouseClose = (e) => {
     if (
@@ -16,7 +16,7 @@ export default class Popup {
     ) {
       this.close();
     }
-  }
+  };
 
   setEventListeners() {
     this._popup.addEventListener('click', this._handleMouseClose);

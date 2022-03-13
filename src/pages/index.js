@@ -1,3 +1,4 @@
+import './index.css';
 import FormValidator from '../components/FormValidator.js';
 import Card from '../components/Card.js';
 import Section from '../components/Section.js';
@@ -13,8 +14,8 @@ import {
   inputDescription,
   editProfileButton,
   addCardButton,
-  initialCards }
-  from '../components/constants.js';
+  initialCards,
+} from '../components/constants.js';
 
 const formEditProfileValidator = new FormValidator(
   validationConfig,
@@ -26,7 +27,9 @@ const section = new Section(
   {
     items: initialCards,
     renderer: (element) => {
-      const card = new Card(element, cardTemplateSelector, () => handleCardClick(element));
+      const card = new Card(element, cardTemplateSelector, () =>
+        handleCardClick(element)
+      );
       const cardElement = card.createCard();
       section.addItem(cardElement);
     },
@@ -35,23 +38,36 @@ const section = new Section(
 );
 
 const addCardModalSubmitHandler = (data) => {
-  const card = new Card({ name: data.title, link: data.link }, cardTemplateSelector, () => handleCardClick(data));
+  const card = new Card(
+    { name: data.title, link: data.link },
+    cardTemplateSelector,
+    () => handleCardClick(data)
+  );
   const cardElement = card.createCard();
   section.addItem(cardElement);
 
   popupWithFormEditProfile.close();
-}
+};
 
 const editProfileModalSubmitHandler = (data) => {
-  const { name, job} = data;
+  const { name, job } = data;
   userInfo.setUserInfo(name, job);
   popupWithFormAddCard.close();
-}
+};
 
 const popupWithImage = new PopupWithImage('.popup_type_image');
-const popupWithFormAddCard = new PopupWithForm('.popup_type_add-card', addCardModalSubmitHandler);
-const popupWithFormEditProfile = new PopupWithForm('.popup_type_edit', editProfileModalSubmitHandler);
-const userInfo = new UserInfo({ userNameSelector: '.profile__name-text', userJobSelector: '.profile__job' })
+const popupWithFormAddCard = new PopupWithForm(
+  '.popup_type_add-card',
+  addCardModalSubmitHandler
+);
+const popupWithFormEditProfile = new PopupWithForm(
+  '.popup_type_edit',
+  editProfileModalSubmitHandler
+);
+const userInfo = new UserInfo({
+  userNameSelector: '.profile__name-text',
+  userJobSelector: '.profile__job',
+});
 
 function handleCardClick(data) {
   popupWithImage.open(data.name, data.link);
@@ -65,7 +81,7 @@ popupWithFormAddCard.setEventListeners();
 popupWithFormEditProfile.setEventListeners();
 
 editProfileButton.addEventListener('click', () => {
-  const { name, job } = userInfo.getUserInfo()
+  const { name, job } = userInfo.getUserInfo();
   inputName.value = name;
   inputDescription.value = job;
   formEditProfileValidator.toggleButton();

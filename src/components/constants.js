@@ -4,7 +4,7 @@ export const validationConfig = {
   submitButtonSelector: '.popup__submit-btn',
   inactiveButtonClass: 'popup__submit-btn_inactive',
   inputErrorClass: 'popup__input_type_error',
-  errorClass: 'popup__input-error'
+  errorClass: 'popup__input-error',
 };
 
 export const cardTemplateSelector = '.card-template';
@@ -18,7 +18,9 @@ export const formEditProfile = modalEditProfile.querySelector('.popup__form');
 export const formAddCard = modalAddCard.querySelector('.popup__form');
 
 //  Inputs
-export const inputName = formEditProfile.querySelector('.popup__input_field_name');
+export const inputName = formEditProfile.querySelector(
+  '.popup__input_field_name'
+);
 export const inputDescription = formEditProfile.querySelector(
   '.popup__input_field_job'
 );
