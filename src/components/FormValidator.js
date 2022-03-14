@@ -38,8 +38,8 @@ export default class FormValidator {
     this._toggleButton();
     this._inputs.forEach((input) => {
       const errorContainer = this._form.querySelector(`#${input.id}-error`);
-      this._hideError(input, errorContainer)
-    })
+      this._hideError(input, errorContainer);
+    });
   }
 
   _validateInput(input) {

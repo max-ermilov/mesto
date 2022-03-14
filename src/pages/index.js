@@ -23,33 +23,39 @@ const formEditProfileValidator = new FormValidator(
 );
 const formAddCardValidator = new FormValidator(validationConfig, formAddCard);
 
+const createCard = (data, cardTemplateSelector, handleCardClick) => {
+  const card = new Card(data, cardTemplateSelector, handleCardClick);
+  return card.renderCard();
+};
+
 const section = new Section(
   {
     items: initialCards,
-    renderer: (element) => {
-      const card = new Card(element, cardTemplateSelector, () =>
-        handleCardClick(element)
+    renderer: (data) => {
+      const cardElement = createCard(data, cardTemplateSelector, () =>
+        handleCardClick(data)
       );
-      const cardElement = card.createCard();
       section.addItem(cardElement);
     },
   },
   '.elements__list'
 );
 
-const addCardModalSubmitHandler = (data) => {
-  const card = new Card(
-    { name: data.title, link: data.link },
+const handleAddCardModalSubmit = (data) => {
+  const cardElement = createCard(
+    {
+      name: data.title,
+      link: data.link,
+    },
     cardTemplateSelector,
     () => handleCardClick(data)
   );
-  const cardElement = card.createCard();
   section.addItem(cardElement);
 
   popupWithFormEditProfile.close();
 };
 
-const editProfileModalSubmitHandler = (data) => {
+const handleEditProfileModal = (data) => {
   const { name, job } = data;
   userInfo.setUserInfo(name, job);
   popupWithFormAddCard.close();
@@ -58,11 +64,11 @@ const editProfileModalSubmitHandler = (data) => {
 const popupWithImage = new PopupWithImage('.popup_type_image');
 const popupWithFormAddCard = new PopupWithForm(
   '.popup_type_add-card',
-  addCardModalSubmitHandler
+  handleAddCardModalSubmit
 );
 const popupWithFormEditProfile = new PopupWithForm(
   '.popup_type_edit',
-  editProfileModalSubmitHandler
+  handleEditProfileModal
 );
 const userInfo = new UserInfo({
   userNameSelector: '.profile__name-text',
@@ -70,7 +76,8 @@ const userInfo = new UserInfo({
 });
 
 function handleCardClick(data) {
-  popupWithImage.open(data.name, data.link);
+  const { name, link } = { name: data.title || data.name, link: data.link };
+  popupWithImage.open(name, link);
 }
 
 section.renderElements();
