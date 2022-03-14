@@ -6,6 +6,8 @@ export default class FormValidator {
     this._inputErrorClass = settings.inputErrorClass;
     this._submitButtonSelector = settings.submitButtonSelector;
     this._inactiveButtonClass = settings.inactiveButtonClass;
+    this._inputs = this._form.querySelectorAll(this._inputSelector);
+    this._submitButton = this._form.querySelector(this._submitButtonSelector);
   }
 
   _showError(input, errorContainer, errorText) {
@@ -20,24 +22,31 @@ export default class FormValidator {
     errorContainer.textContent = '';
   }
 
-  toggleButton() {
-    const button = this._form.querySelector(this._submitButtonSelector);
+  _toggleButton() {
     const isFormValid = this._form.checkValidity();
 
     if (isFormValid) {
-      button.classList.remove(this._inactiveButtonClass);
-      button.removeAttribute('disabled');
+      this._submitButton.classList.remove(this._inactiveButtonClass);
+      this._submitButton.removeAttribute('disabled');
     } else {
-      button.classList.add(this._inactiveButtonClass);
-      button.setAttribute('disabled', '');
+      this._submitButton.classList.add(this._inactiveButtonClass);
+      this._submitButton.setAttribute('disabled', '');
     }
+  }
+
+  resetValidation() {
+    this._toggleButton();
+    this._inputs.forEach((input) => {
+      const errorContainer = this._form.querySelector(`#${input.id}-error`);
+      this._hideError(input, errorContainer)
+    })
   }
 
   _validateInput(input) {
     const errorContainer = this._form.querySelector(`#${input.id}-error`);
 
-    let isValid = input.validity.valid;
-    let errorText = input.validationMessage;
+    const isValid = input.validity.valid;
+    const errorText = input.validationMessage;
 
     if (isValid) {
       this._hideError(input, errorContainer);
@@ -45,16 +54,13 @@ export default class FormValidator {
       this._showError(input, errorContainer, errorText);
     }
 
-    this.toggleButton();
+    this._toggleButton();
   }
 
   enableValidation() {
-    const inputs = this._form.querySelectorAll(this._inputSelector);
-
-    inputs.forEach((input) => {
+    this._inputs.forEach((input) => {
       input.addEventListener('input', () => {
         this._validateInput(input);
-        this.toggleButton();
       });
     });
   }

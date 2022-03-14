@@ -15,7 +15,7 @@ import {
   editProfileButton,
   addCardButton,
   initialCards,
-} from '../components/constants.js';
+} from '../utils/constants.js';
 
 const formEditProfileValidator = new FormValidator(
   validationConfig,
@@ -84,11 +84,11 @@ editProfileButton.addEventListener('click', () => {
   const { name, job } = userInfo.getUserInfo();
   inputName.value = name;
   inputDescription.value = job;
-  formEditProfileValidator.toggleButton();
+  formEditProfileValidator.resetValidation();
   popupWithFormEditProfile.open();
 });
 
 addCardButton.addEventListener('click', () => {
+  formAddCardValidator.resetValidation();
   popupWithFormAddCard.open();
-  formAddCardValidator.toggleButton();
 });
