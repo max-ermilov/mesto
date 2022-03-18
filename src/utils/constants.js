@@ -31,27 +31,35 @@ export const addCardButton = document.querySelector('.profile__add-btn');
 
 export const initialCards = [
   {
-    name: 'Архыз',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg',
+    name: 'Меркурий',
+    link: 'https://scriptangle.agency/mesto/01_Mercury_PIA11245_orig.jpg',
   },
   {
-    name: 'Челябинская область',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg',
+    name: 'Венера',
+    link: 'https://scriptangle.agency/mesto/02_Venus_PIA00271_medium.jpg',
   },
   {
-    name: 'Иваново',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg',
+    name: 'Земля',
+    link: 'https://scriptangle.agency/mesto/03_Earth_as11-44-6551_large.jpg',
   },
   {
-    name: 'Камчатка',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg',
+    name: 'Марс',
+    link: 'https://scriptangle.agency/mesto/04_Mars_PIA01591_orig.jpg',
   },
   {
-    name: 'Холмогорский район',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg',
+    name: 'Юпитер',
+    link: 'https://scriptangle.agency/mesto/05_Jupitetr_PIA00343_orig.jpg',
   },
   {
-    name: 'Байкал',
-    link: 'https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg',
+    name: 'Сатурн',
+    link: 'https://scriptangle.agency/mesto/06_Saturn_PIA05389_orig.jpg',
+  },
+  {
+    name: 'Уран',
+    link: 'https://scriptangle.agency/mesto/07_Uranus_stsci-h-p1906c-f-514x514.a_orig.png',
+  },
+  {
+    name: 'Нептун',
+    link: 'https://scriptangle.agency/mesto/08_Neptune_PIA01492_medium.jpg',
   },
 ];

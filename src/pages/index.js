@@ -15,7 +15,21 @@ import {
   editProfileButton,
   addCardButton,
   initialCards,
-} from '../components/constants.js';
+} from '../utils/constants.js';
+import { api } from '../components/Api';
+
+api.getProfile()
+  .then((res) => {
+    userInfo.setUserInfo(res.name, res.about)
+  });
+
+api.getInitialCards()
+  .then(cardList => {
+    cardList.forEach(data => {
+      const card = createCard(data);
+      section.addItem(card);
+    })
+  })
 
 const formEditProfileValidator = new FormValidator(
   validationConfig,
@@ -23,46 +37,55 @@ const formEditProfileValidator = new FormValidator(
 );
 const formAddCardValidator = new FormValidator(validationConfig, formAddCard);
 
+const createCard = (data) => {
+  const card = new Card(data, cardTemplateSelector, () =>
+    handleCardClick(data));
+  return card.renderCard();
+};
+
 const section = new Section(
   {
     items: initialCards,
-    renderer: (element) => {
-      const card = new Card(element, cardTemplateSelector, () =>
-        handleCardClick(element)
-      );
-      const cardElement = card.createCard();
+    renderer: (data) => {
+      const cardElement = createCard(data);
       section.addItem(cardElement);
     },
   },
   '.elements__list'
 );
 
-const addCardModalSubmitHandler = (data) => {
-  const card = new Card(
-    { name: data.title, link: data.link },
-    cardTemplateSelector,
-    () => handleCardClick(data)
-  );
-  const cardElement = card.createCard();
+const handleAddCardModalSubmit = (data) => {
+  const cardElement = createCard(
+    {
+      name: data.title,
+      link: data.link,
+    });
+
+  api.addCard(data.title, data.link)
+    .then(res => console.log('res', res))
+
   section.addItem(cardElement);
 
   popupWithFormEditProfile.close();
 };
 
-const editProfileModalSubmitHandler = (data) => {
+const handleEditProfileModal = (data) => {
   const { name, job } = data;
-  userInfo.setUserInfo(name, job);
-  popupWithFormAddCard.close();
+  api.editProfile(name, job)
+    .then(res => {
+      userInfo.setUserInfo(res.name, res.about);
+      popupWithFormAddCard.close();
+    })
 };
 
 const popupWithImage = new PopupWithImage('.popup_type_image');
 const popupWithFormAddCard = new PopupWithForm(
   '.popup_type_add-card',
-  addCardModalSubmitHandler
+  handleAddCardModalSubmit
 );
 const popupWithFormEditProfile = new PopupWithForm(
   '.popup_type_edit',
-  editProfileModalSubmitHandler
+  handleEditProfileModal
 );
 const userInfo = new UserInfo({
   userNameSelector: '.profile__name-text',
@@ -70,7 +93,8 @@ const userInfo = new UserInfo({
 });
 
 function handleCardClick(data) {
-  popupWithImage.open(data.name, data.link);
+  const { name, link } = { name: data.title || data.name, link: data.link };
+  popupWithImage.open(name, link);
 }
 
 section.renderElements();
@@ -84,11 +108,11 @@ editProfileButton.addEventListener('click', () => {
   const { name, job } = userInfo.getUserInfo();
   inputName.value = name;
   inputDescription.value = job;
-  formEditProfileValidator.toggleButton();
+  formEditProfileValidator.resetValidation();
   popupWithFormEditProfile.open();
 });
 
 addCardButton.addEventListener('click', () => {
+  formAddCardValidator.resetValidation();
   popupWithFormAddCard.open();
-  formAddCardValidator.toggleButton();
 });

@@ -29,7 +29,7 @@ export default class Card {
     this._cardImage.alt = this._data.name;
   }
 
-  createCard() {
+  renderCard() {
     this._cardElement = this._template.cloneNode(true);
 
     this._cardImage = this._cardElement.querySelector('.element__image');
