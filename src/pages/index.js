@@ -55,18 +55,15 @@ const section = new Section(
 );
 
 const handleAddCardModalSubmit = (data) => {
-  const cardElement = createCard(
-    {
-      name: data.title,
-      link: data.link,
+    api.addCard(data.title, data.link).then((res) => {
+      const cardElement = createCard(
+        {
+          name: res.name,
+          link: res.link
+        });
+      section.addItem(cardElement);
+      popupWithFormEditProfile.close();
     });
-
-  api.addCard(data.title, data.link)
-    .then(res => console.log('res', res))
-
-  section.addItem(cardElement);
-
-  popupWithFormEditProfile.close();
 };
 
 const handleEditProfileModal = (data) => {
