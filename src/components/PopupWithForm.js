@@ -16,12 +16,21 @@ export default class PopupWithForm extends Popup {
     return formValues;
   }
 
+  _handleSubmit() {
+    // e.preventDefault();
+    this._formSubmitCallback(this._getInputValues());
+    this.close();
+  }
+
+  cangeSubmitHandler(newSubmitHandler) {
+    this._handleSubmit = newSubmitHandler
+  }
+
   setEventListeners() {
     super.setEventListeners();
     this._form.addEventListener('submit', (e) => {
       e.preventDefault();
-      this._formSubmitCallback(this._getInputValues());
-      this.close();
+      this._handleSubmit();
     });
   }
 

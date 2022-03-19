@@ -18,14 +18,21 @@ import {
 } from '../utils/constants.js';
 import { api } from '../components/Api';
 
+let userId;
+
 api.getProfile()
   .then((res) => {
+    userId = res._id;
     userInfo.setUserInfo(res.name, res.about)
   });
 
 api.getInitialCards()
   .then(cardList => {
+    cardList.reverse();
     cardList.forEach(data => {
+      data.userId = userId;
+      // console.log(data);
+      // data.ownerId = data.owner._id
       const card = createCard(data);
       section.addItem(card);
     })
@@ -38,15 +45,31 @@ const formEditProfileValidator = new FormValidator(
 const formAddCardValidator = new FormValidator(validationConfig, formAddCard);
 
 const createCard = (data) => {
-  const card = new Card(data, cardTemplateSelector, () =>
-    handleCardClick(data));
+  const card = new Card(
+    data,
+    cardTemplateSelector,
+    () => handleCardClick(data),
+    (id) => {
+      popupWithFormDeleteConfirm.open();
+      popupWithFormDeleteConfirm.cangeSubmitHandler(() => {
+        api.deleteCard(id)
+          .then(() => {
+            card.delete();
+            popupWithFormDeleteConfirm.close();
+          })
+      });
+    }
+  );
+
   return card.renderCard();
 };
 
 const section = new Section(
   {
-    items: initialCards,
+    // items: initialCards,
+    items: [],
     renderer: (data) => {
+      data.userId = userId;
       const cardElement = createCard(data);
       section.addItem(cardElement);
     },
@@ -56,11 +79,7 @@ const section = new Section(
 
 const handleAddCardModalSubmit = (data) => {
     api.addCard(data.title, data.link).then((res) => {
-      const cardElement = createCard(
-        {
-          name: res.name,
-          link: res.link
-        });
+      const cardElement = createCard(res);
       section.addItem(cardElement);
       popupWithFormEditProfile.close();
     });
@@ -84,6 +103,8 @@ const popupWithFormEditProfile = new PopupWithForm(
   '.popup_type_edit',
   handleEditProfileModal
 );
+const popupWithFormDeleteConfirm = new PopupWithForm(
+  '.popup_type_delete-confirm' );
 const userInfo = new UserInfo({
   userNameSelector: '.profile__name-text',
   userJobSelector: '.profile__job',
@@ -100,6 +121,7 @@ formAddCardValidator.enableValidation();
 popupWithImage.setEventListeners();
 popupWithFormAddCard.setEventListeners();
 popupWithFormEditProfile.setEventListeners();
+popupWithFormDeleteConfirm.setEventListeners();
 
 editProfileButton.addEventListener('click', () => {
   const { name, job } = userInfo.getUserInfo();
