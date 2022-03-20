@@ -46,6 +46,24 @@ class Api {
       .then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
       .catch(console.log);
   }
+
+  deleteLike(cardId) {
+    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+      method: 'DELETE',
+      headers: this._headers,
+    })
+      .then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
+      .catch(console.log);
+  }
+
+  addLike(cardId) {
+    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
+      method: 'PUT',
+      headers: this._headers,
+    })
+      .then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
+      .catch(console.log);
+  }
   // другие методы работы с API
 }
 

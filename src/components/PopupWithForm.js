@@ -22,7 +22,7 @@ export default class PopupWithForm extends Popup {
     this.close();
   }
 
-  cangeSubmitHandler(newSubmitHandler) {
+  changeSubmitHandler(newSubmitHandler) {
     this._handleSubmit = newSubmitHandler
   }
 

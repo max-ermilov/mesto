@@ -13,11 +13,18 @@
 <main class="content page__content">
   <section class="profile">
     <div class="profile__content">
-      <img
-        src="<%=require('./images/avatar.jpg')%>"
-        alt="Фото профиля"
-        class="profile__avatar"
-      />
+      <div class="profile__avatar-container">
+        <img
+          src="<%=require('./images/avatar.jpg')%>"
+          alt="Фото профиля"
+          class="profile__avatar"
+        />
+        <button
+          class="button profile__avatar-edit-btn"
+          aria-label="Редактировать аватар"
+          type="button"
+        ></button>
+      </div>
       <div class="profile__info">
         <div class="profile__name">
           <h1 class="profile__name-text"></h1>

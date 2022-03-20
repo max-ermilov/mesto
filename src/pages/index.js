@@ -14,7 +14,6 @@ import {
   inputDescription,
   editProfileButton,
   addCardButton,
-  initialCards,
 } from '../utils/constants.js';
 import { api } from '../components/Api';
 
@@ -34,6 +33,7 @@ api.getInitialCards()
       // console.log(data);
       // data.ownerId = data.owner._id
       const card = createCard(data);
+      // console.log('api.getInitialCards');
       section.addItem(card);
     })
   })
@@ -49,15 +49,32 @@ const createCard = (data) => {
     data,
     cardTemplateSelector,
     () => handleCardClick(data),
-    (id) => {
+    (cardId) => {
       popupWithFormDeleteConfirm.open();
-      popupWithFormDeleteConfirm.cangeSubmitHandler(() => {
-        api.deleteCard(id)
+      document.querySelector('.popup__confirm-btn').focus();
+      popupWithFormDeleteConfirm.changeSubmitHandler(() => {
+        api.deleteCard(cardId)
           .then(() => {
             card.delete();
             popupWithFormDeleteConfirm.close();
           })
       });
+    },
+    (cardId) => {
+      if (card.isLiked()) {
+        api.deleteLike(cardId)
+          .then(res => {
+            console.log(res);
+            card.setLikes(res.likes)
+          })
+      } else {
+        api.addLike(cardId)
+          .then(res => {
+            console.log(res);
+            card.setLikes(res.likes)
+          })
+      }
+
     }
   );
 
@@ -71,6 +88,7 @@ const section = new Section(
     renderer: (data) => {
       data.userId = userId;
       const cardElement = createCard(data);
+      // console.log('section');
       section.addItem(cardElement);
     },
   },
@@ -79,7 +97,9 @@ const section = new Section(
 
 const handleAddCardModalSubmit = (data) => {
     api.addCard(data.title, data.link).then((res) => {
+      res.userId = userId;
       const cardElement = createCard(res);
+      // console.log('handleAddCardModalSubmit');
       section.addItem(cardElement);
       popupWithFormEditProfile.close();
     });
@@ -135,3 +155,5 @@ addCardButton.addEventListener('click', () => {
   formAddCardValidator.resetValidation();
   popupWithFormAddCard.open();
 });
+
+//TODO 2:17:06 постановка и снятие лайков
