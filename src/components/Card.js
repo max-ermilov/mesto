@@ -30,6 +30,7 @@ export default class Card {
     this._cardImage.alt = this._data.name;
   }
 
+
   _setLikeIcon() {
     this._likeButton.classList.add('element__like-btn_active');
   }
