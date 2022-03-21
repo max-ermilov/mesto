@@ -82,14 +82,8 @@ const createCard = (data) => {
   return card.renderCard();
 };
 
-const createCard = (data, cardTemplateSelector, handleCardClick) => {
-  const card = new Card(data, cardTemplateSelector, handleCardClick);
-  return card.renderCard();
-};
-
 const section = new Section(
   {
-
     items: [],
     renderer: (data) => {
       data.userId = userId;
@@ -201,5 +195,4 @@ avatarEditButton.addEventListener('click', () => {
   inputAvatar.value = avatar;
   formEditAvatarValidator.resetValidation();
   popupWithFormEditAvatar.open();
-
 });

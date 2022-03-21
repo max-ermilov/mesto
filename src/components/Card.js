@@ -16,7 +16,6 @@ export default class Card {
 
 
   _setEventListeners() {
-    // this._deleteButton.addEventListener('click', () => this._deleteHandler());
     this._deleteButton.addEventListener('click', () => this._handleDeleteClick(this._data._id));
     this._likeButton.addEventListener('click', () => this._handleLikeClick(this._data._id));
     this._cardImage.addEventListener('click', () => {
@@ -29,7 +28,6 @@ export default class Card {
     this._cardImage.src = this._data.link;
     this._cardImage.alt = this._data.name;
   }
-
 
   _setLikeIcon() {
     this._likeButton.classList.add('element__like-btn_active');
@@ -46,9 +44,7 @@ export default class Card {
     this._data.likes = newLikes;
     const likeCountElement = this._cardElement.querySelector('.element__like-count');
     likeCountElement.textContent = this._data.likes.length ;
-    // const userOwnLike = this._data.likes.find(user => user._id === this._data.userId)
     if (this.isLiked()) {
-      // console.log(userOwnLike);
       this._setLikeIcon()
     } else {
       this._unsetLikeIcon()
@@ -69,10 +65,7 @@ export default class Card {
     this._setEventListeners();
     this.setLikes(this._data.likes);
     if (this._data.owner._id !== this._data.userId) {
-      // console.log('is not owner', this._data.name);
       this._deleteButton.style.display = 'none';
-    // } else {
-    //   console.log('is owner', this._data.name);
     };
 
     return this._cardElement;
