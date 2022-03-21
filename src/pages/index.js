@@ -95,15 +95,22 @@ const section = new Section(
 );
 
 const handleAddCardModalSubmit = (data) => {
-  api.addCard(data.title, data.link).then((res) => {
-    res.userId = userId;
-    const cardElement = createCard(res);
-    section.addItem(cardElement);
-    popupWithFormAddCard.close();
-  });
+  popupWithFormAddCard.renderButtonText(true);
+  api
+    .addCard(data.title, data.link)
+    .then((res) => {
+      res.userId = userId;
+      const cardElement = createCard(res);
+      section.addItem(cardElement);
+      popupWithFormAddCard.close();
+    })
+    .finally(() => {
+      popupWithFormAddCard.renderButtonText(false);
+    });
 };
 
 const handleEditProfileModal = (data) => {
+  popupWithFormEditProfile.renderButtonText(true);
   const { name, job } = data;
   api
     .editProfile(name, job)
@@ -112,10 +119,14 @@ const handleEditProfileModal = (data) => {
     })
     .then(() => {
       popupWithFormEditProfile.close();
+    })
+    .finally(() => {
+      popupWithFormEditProfile.renderButtonText(false);
     });
 };
 
 const handleEditAvatarModal = (newAvatar) => {
+  popupWithFormEditAvatar.renderButtonText(true);
   api
     .editAvatar(newAvatar)
     .then((res) => {
@@ -123,6 +134,9 @@ const handleEditAvatarModal = (newAvatar) => {
     })
     .then(() => {
       popupWithFormEditAvatar.close();
+    })
+    .finally(() => {
+      popupWithFormEditAvatar.renderButtonText(false);
     });
 };
 
@@ -147,16 +161,6 @@ const userInfo = new UserInfo({
   userJobSelector: '.profile__job',
   userAvatarSelector: '.profile__avatar',
 });
-
-function renderLoading(isLoading) {
-  if (isLoading) {
-    spinner.classList.add('spinner_visible');
-    content.classList.add('content_hidden');
-  } else {
-    spinner.classList.remove('spinner_visible');
-    content.classList.remove('content_hidden');
-  }
-}
 
 function handleCardClick(data) {
   const { name, link } = { name: data.title || data.name, link: data.link };
