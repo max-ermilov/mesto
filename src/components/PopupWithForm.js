@@ -17,13 +17,11 @@ export default class PopupWithForm extends Popup {
   }
 
   _handleSubmit() {
-    // e.preventDefault();
     this._formSubmitCallback(this._getInputValues());
-    this.close();
   }
 
   changeSubmitHandler(newSubmitHandler) {
-    this._handleSubmit = newSubmitHandler
+    this._handleSubmit = newSubmitHandler;
   }
 
   setEventListeners() {

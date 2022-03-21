@@ -15,7 +15,6 @@
     <div class="profile__content">
       <div class="profile__avatar-container">
         <img
-          src="<%=require('./images/avatar.jpg')%>"
           alt="Фото профиля"
           class="profile__avatar"
         />
@@ -152,6 +151,35 @@
         value="Да"
         name="confirm"
       >Да</button>
+    </form>
+    <button
+      class="button popup__close-btn"
+      type="button"
+      name="close"
+    ></button>
+  </div>
+</div>
+<!--<div class="popup popup_type_edit-avatar popup_opened">-->
+  <div class="popup popup_type_edit-avatar">
+  <div class="popup__container">
+    <h2 class="popup__title">Обновить аватар</h2>
+    <form class="popup__form" name="edit-avatar" novalidate>
+      <input
+        type="url"
+        class="popup__input popup__input_field_avatar"
+        name="avatar"
+        id="avatar"
+        placeholder="Ссылка на картинку"
+        aria-label="Аватар"
+        required
+      />
+      <span class="popup__input-error" id="avatar-error"></span>
+      <input
+        class="button popup__submit-btn popup__save-btn"
+        type="submit"
+        value="Сохранить"
+        name="save"
+      />
     </form>
     <button
       class="button popup__close-btn"
