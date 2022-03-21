@@ -99,7 +99,7 @@ const handleAddCardModalSubmit = (data) => {
     res.userId = userId;
     const cardElement = createCard(res);
     section.addItem(cardElement);
-    popupWithFormEditProfile.close();
+    popupWithFormAddCard.close();
   });
 };
 
