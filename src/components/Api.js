@@ -4,20 +4,29 @@ class Api {
     this._baseUrl = baseUrl;
   }
 
+  _checkResponse(res) {
+  if (res.ok) {
+      return res.json()
+  } else {
+      return Promise.reject(`Ошибка: ${res.status}`)
+        .catch((err) => {
+          console.log(err)
+        });
+    }
+  }
+
   getProfile() {
     return fetch(`${this._baseUrl}/users/me`, {
       headers: this._headers,
     })
-      .then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
-      .catch(console.log);
+      .then((res) => this._checkResponse(res))
   }
 
   getInitialCards() {
     return fetch(`${this._baseUrl}/cards`, {
       headers: this._headers,
     })
-      .then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
-      .catch(console.log);
+      .then((res) => this._checkResponse(res))
   }
 
   editProfile(name, about) {
@@ -26,8 +35,7 @@ class Api {
       headers: this._headers,
       body: JSON.stringify({ name, about }),
     })
-      .then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
-      .catch(console.log);
+      .then((res) => this._checkResponse(res))
   }
 
   editAvatar(avatar) {
@@ -36,8 +44,7 @@ class Api {
       headers: this._headers,
       body: JSON.stringify(avatar),
     })
-      .then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
-      .catch(console.log);
+      .then((res) => this._checkResponse(res))
   }
 
   addCard(name, link) {
@@ -46,8 +53,7 @@ class Api {
       headers: this._headers,
       body: JSON.stringify({ name, link }),
     })
-      .then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
-      .catch(console.log);
+      .then((res) => this._checkResponse(res))
   }
 
   deleteCard(id) {
@@ -55,8 +61,7 @@ class Api {
       method: 'DELETE',
       headers: this._headers,
     })
-      .then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
-      .catch(console.log);
+      .then((res) => this._checkResponse(res))
   }
 
   deleteLike(cardId) {
@@ -64,8 +69,7 @@ class Api {
       method: 'DELETE',
       headers: this._headers,
     })
-      .then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
-      .catch(console.log);
+      .then((res) => this._checkResponse(res))
   }
 
   addLike(cardId) {
@@ -73,8 +77,7 @@ class Api {
       method: 'PUT',
       headers: this._headers,
     })
-      .then((res) => (res.ok ? res.json() : Promise.reject(res.status)))
-      .catch(console.log);
+      .then((res) => this._checkResponse(res))
   }
 }
 
