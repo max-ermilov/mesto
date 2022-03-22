@@ -1,5 +1,11 @@
 export default class Card {
-  constructor(data, cardTemplateSelector, handleCardClick, handleDeleteClick, handleLikeClick) {
+  constructor(
+    data,
+    cardTemplateSelector,
+    handleCardClick,
+    handleDeleteClick,
+    handleLikeClick
+  ) {
     this._data = data;
     this._template = document
       .querySelector(cardTemplateSelector)
@@ -11,13 +17,16 @@ export default class Card {
 
   delete() {
     this._cardElement.remove();
+    this._cardElement = null;
   }
 
-
-
   _setEventListeners() {
-    this._deleteButton.addEventListener('click', () => this._handleDeleteClick(this._data._id));
-    this._likeButton.addEventListener('click', () => this._handleLikeClick(this._data._id));
+    this._deleteButton.addEventListener('click', () =>
+      this._handleDeleteClick(this._data._id)
+    );
+    this._likeButton.addEventListener('click', () =>
+      this._handleLikeClick(this._data._id)
+    );
     this._cardImage.addEventListener('click', () => {
       this._handleCardClick(this._data);
     });
@@ -38,16 +47,19 @@ export default class Card {
   }
 
   isLiked() {
-    return this._data.likes.find(user => user._id === this._data.userId)
+    return this._data.likes.find((user) => user._id === this._data.userId);
   }
+
   setLikes(newLikes) {
     this._data.likes = newLikes;
-    const likeCountElement = this._cardElement.querySelector('.element__like-count');
-    likeCountElement.textContent = this._data.likes.length ;
+    const likeCountElement = this._cardElement.querySelector(
+      '.element__like-count'
+    );
+    likeCountElement.textContent = this._data.likes.length;
     if (this.isLiked()) {
-      this._setLikeIcon()
+      this._setLikeIcon();
     } else {
-      this._unsetLikeIcon()
+      this._unsetLikeIcon();
     }
   }
 
@@ -66,8 +78,7 @@ export default class Card {
     this.setLikes(this._data.likes);
     if (this._data.owner._id !== this._data.userId) {
       this._deleteButton.style.display = 'none';
-    };
-
+    }
     return this._cardElement;
   }
 }

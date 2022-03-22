@@ -8,9 +8,7 @@ class Api {
     if (res.ok) {
       return res.json();
     } else {
-      return Promise.reject(`Ошибка: ${res.status}`).catch((err) => {
-        console.log(err);
-      });
+      return Promise.reject(`Ошибка: ${res.status}`)
     }
   }
 

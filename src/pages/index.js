@@ -22,19 +22,23 @@ import { api } from '../components/Api';
 
 let userId;
 
-api.getProfile().then((res) => {
-  userId = res._id;
-  userInfo.setUserInfo(res.name, res.about, res.avatar);
-});
+Promise.all(
+  [api.getProfile().then((res) => {
+    userId = res._id;
+    userInfo.setUserInfo(res.name, res.about, res.avatar);
+  }),
 
-api.getInitialCards().then((cardList) => {
-  cardList.reverse();
-  cardList.forEach((data) => {
-    data.userId = userId;
-    const card = createCard(data);
-    section.addItem(card);
-  });
-});
+  api.getInitialCards().then((cardList) => {
+    cardList.forEach((data) => {
+      data.userId = userId;
+      const card = createCard(data);
+      section.addItemAppend(card);
+    });
+  })]
+)
+  .catch((err) => {
+    console.log(err);
+  })
 
 const formEditProfileValidator = new FormValidator(
   validationConfig,
@@ -61,8 +65,8 @@ const createCard = (data) => {
             card.delete();
             popupWithFormDeleteConfirm.close();
           })
-          .then(() => {
-            popupWithFormDeleteConfirm.close();
+          .catch((err) => {
+            console.log(err);
           });
       });
     },
@@ -70,11 +74,17 @@ const createCard = (data) => {
       if (card.isLiked()) {
         api.deleteLike(cardId).then((res) => {
           card.setLikes(res.likes);
-        });
+        })
+          .catch((err) => {
+            console.log(err);
+          });
       } else {
         api.addLike(cardId).then((res) => {
           card.setLikes(res.likes);
-        });
+        })
+          .catch((err) => {
+            console.log(err);
+          });
       }
     }
   );
@@ -88,7 +98,7 @@ const section = new Section(
     renderer: (data) => {
       data.userId = userId;
       const cardElement = createCard(data);
-      section.addItem(cardElement);
+      section.addItemPrepend(cardElement);
     },
   },
   '.elements__list'
@@ -101,8 +111,11 @@ const handleAddCardModalSubmit = (data) => {
     .then((res) => {
       res.userId = userId;
       const cardElement = createCard(res);
-      section.addItem(cardElement);
+      section.addItemPrepend(cardElement);
       popupWithFormAddCard.close();
+    })
+    .catch((err) => {
+      console.log(err);
     })
     .finally(() => {
       popupWithFormAddCard.renderButtonText(false);
@@ -116,9 +129,10 @@ const handleEditProfileModal = (data) => {
     .editProfile(name, job)
     .then((res) => {
       userInfo.setUserInfo(res.name, res.about, res.avatar);
-    })
-    .then(() => {
       popupWithFormEditProfile.close();
+    })
+    .catch((err) => {
+      console.log(err);
     })
     .finally(() => {
       popupWithFormEditProfile.renderButtonText(false);
@@ -131,9 +145,10 @@ const handleEditAvatarModal = (newAvatar) => {
     .editAvatar(newAvatar)
     .then((res) => {
       userInfo.setUserInfo(res.name, res.about, res.avatar);
-    })
-    .then(() => {
       popupWithFormEditAvatar.close();
+    })
+    .catch((err) => {
+      console.log(err);
     })
     .finally(() => {
       popupWithFormEditAvatar.renderButtonText(false);
